@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms with blinking text and auto validation features</title>
+    <style>
+        .validating_form {
+            color: red;
+            text-align: center;
+            font-size: 25px;
+
+        }
+
+        .blinking_text {
+            color: blue;
+            font-size: 30px;
+            font-family: cursive;
+
+            animation: blinking 2.0s infinite;
+
+        }
+
+        @keyframes blinking {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        #clock {
+            
+            width: 100%;
+
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+        }
+    </style>
+
+</head>
+
+<body style="background-color: chartreuse;">
+
+
+    <H1><U>
+            <CENTER>THERE IS THE SECOND LAB OF IWT</CENTER>
+        </U>
+    </H1>
+   
+    <div style="border: solid black;">
+        <h3 class="blinking_text">This is a digital clock.</h3>
+        <b id="clock"></b>  
+    </div>
+
+    <div class="validating_form">
+        This is a validating form.
+    </div> 
+        <form action="" name="Form1">
+            <label>Name:</label>
+            <input type="text" name="Names">
+            <input type="button" value="check" onclick="validate_name(document.Form1.Names)">
+            <br/>
+            <label >Email:</label>
+            <input type="text" name="Email">
+            <input type="button" value="check" onclick="validate_email()">
+            <br/>
+            <label >Password:</label>
+            <input type="text" name='password'>
+            <input type="button" value="check" onclick="validate_pasword()">
+            <br/>
+            <label >Roll No:</label>
+            <input type="text" name="Roll_number">
+            <input type="button" value="check" onclick="validate_roll_no()">
+            <br/>
+            <input type="submit" value="submit">
+        </form>
+    
+
+    <script>
+        setInterval(showTime, 1000);
+        function validate_name(name){
+            
+            var letters = /^[A-Za-z]+$/;
+             if(!name.value.match(letters)||name.value.length<6){
+                alert("enter correct name")
+                return false;
+            }
+            else{
+               return true;
+            }
+        }
+        function validate_pasword(){
+            pass=document.Form1.password.value
+            if(pass.length<6)
+            alert("enter password with max 6 characters.")
+        }
+        function validate_email(){
+            var exp =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+            email=document.Form1.Email.value
+            if(!email.match(exp))
+            alert("wrong email");
+        }
+        function validate_roll_no(){
+            roll = document.Form1.Roll_number.value
+            exp = /^[0-9][A-Z][A-Z][0-9][0-9][A-Z][A-Z][0-9][0-9][0-9]$/
+            if(!roll.match(exp))
+            alert("wrong format")
+        }
+        function showTime() {
+             time = new Date();
+             hour = time.getHours();
+             min = time.getMinutes();
+             sec = time.getSeconds();
+             am_pm = "AM";
+
+            if (hour > 12) {
+                hour -= 12;
+                am_pm = "PM";
+            }
+            if (hour == 0) {
+                hr = 12;
+                am_pm = "AM";
+            }
+
+            hour = hour < 10 ? "0" + hour : hour;
+            min = min < 10 ? "0" + min : min;
+            sec = sec < 10 ? "0" + sec : sec;
+
+             currentTime = hour + ":"
+                + min + ":" + sec + am_pm;
+
+            document.getElementById("clock").innerHTML = currentTime;
+        }
+
+        showTime(); 
+    </script>
+</body>
+
+</html>
